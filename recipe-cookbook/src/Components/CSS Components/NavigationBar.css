@@ -1,0 +1,23 @@
+.logo {
+  /* logo */
+  display: flex;
+  align-items: center;
+}
+.title {
+  /* concept */
+  font-size: 30px;
+  color: #fff;
+  font-weight: bold;
+}
+nav.navbar {
+  padding: 18px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 9999;
+  transition: 0.32s ease-in-out;
+}
+span.navbar-text {
+  display: flex;
+  align-items: center;
+}
