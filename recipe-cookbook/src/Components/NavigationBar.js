@@ -21,7 +21,7 @@ const NavigationBar = () => {
           <div className="logo">
             {" "}
             {/* logo class to style in css */}
-            <span className="title">Recipe Cookbook</span>{" "}
+            <span className="title">RecipeBank</span>{" "}
             {/* cofo class to style in css */}
             {/* concept class to style in css */}
           </div>
@@ -31,24 +31,21 @@ const NavigationBar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           {" "}
           {/* Navbar Collapse for reponsive navigation for mobile phones*/}
-          <Nav className="nav-bar-links">
-            {" "}
-            {/* Nav component for navigation */}
-          </Nav>
-          <Nav.Link
-            className="SIGNUPBAR"
-            href="/signup"
-            style={{
-              // inline styling for the Sign Up button
-              backgroundColor: "#fc4903", // orange
-              color: "white",
-              borderRadius: "20px", // rounded corners
-              padding: "10px 20px",
-            }}
-          >
-            SIGN UP!
-          </Nav.Link>
           <Nav>
+            <Nav.Link
+              eventKey={2}
+              className="SIGNUPBAR"
+              href="/signup"
+              style={{
+                // inline styling for the Sign Up button
+                backgroundColor: "#fc4903", // orange
+                color: "white",
+                borderRadius: "20px", // rounded corners
+                padding: "10px 20px 10px",
+              }}
+            >
+              Sign Up
+            </Nav.Link>
             <Nav.Link
               eventKey={2}
               href="/login"
