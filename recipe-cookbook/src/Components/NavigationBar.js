@@ -1,11 +1,27 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "./CSS Components/NavigationBar.css";
 
-const NavigationBar = () => {
+export const NavigationBar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <Navbar // creating a Navbar component
@@ -14,6 +30,7 @@ const NavigationBar = () => {
         bg="dark" // Navbar will have a light background
         variant="dark" // Navbar will have a light variant
         sticky="top" // Navbar will stick to the top of the page
+        className={scrolled ? "scrolled" : ""}
       >
         <Navbar.Brand href="/">
           {" "}
@@ -69,4 +86,3 @@ const NavigationBar = () => {
     </>
   );
 };
-export default NavigationBar;
