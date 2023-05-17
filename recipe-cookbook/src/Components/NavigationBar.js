@@ -26,7 +26,7 @@ export const NavigationBar = () => {
     <>
       <Navbar // creating a Navbar component
         collapseOnSelect // Navbar will collapse on smaller screens
-        expand="lg" // Navbar will expand on larger screens
+        expand="md" // Navbar will expand on larger screens
         bg="dark" // Navbar will have a light background
         variant="dark" // Navbar will have a light variant
         sticky="top" // Navbar will stick to the top of the page
@@ -43,12 +43,12 @@ export const NavigationBar = () => {
             {/* concept class to style in css */}
           </div>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />{" "}
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {/* Navbar Toggle for reponsive navigation */}
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav">
           {" "}
           {/* Navbar Collapse for reponsive navigation for mobile phones*/}
-          <Nav>
+          <Nav className="ms-auto">
             <Nav.Link
               eventKey={2}
               className="SIGNUPBAR"
@@ -56,29 +56,39 @@ export const NavigationBar = () => {
               style={{
                 // inline styling for the Sign Up button
                 backgroundColor: "#fc4903", // orange
-                color: "white",
                 borderRadius: "20px", // rounded corners
                 padding: "10px 20px 10px",
               }}
             >
-              Sign Up
+              <button
+                className="nav-btn"
+                style={{
+                  color: "white",
+                }}
+              >
+                Sign Up
+              </button>
             </Nav.Link>
             <Nav.Link
               eventKey={2}
               href="/login"
               style={{
                 // inline styling for the Sign Up button
-                backgroundColor: "#fc4903", // orange
                 color: "white",
                 borderRadius: "20px", // rounded corners
                 padding: "10px 20px 10px",
                 marginLeft: "10px",
+                backgroundColor: "#fc4903", // orange
               }}
             >
-              {" "}
-              {/* eventKey is used to identify the component */}
-              {" Login"}
-              {/* FontAwesomeIcon component for icons(User icon) */}
+              <button
+                className="nav-btn"
+                style={{
+                  color: "white",
+                }}
+              >
+                Login
+              </button>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
