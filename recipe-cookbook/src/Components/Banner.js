@@ -22,13 +22,15 @@ const Banner = () => {
   return (
     <div className="banner">
       <img
-        className={scrolled ? "scrolled-banner" : ""}
+        className={!scrolled ? "scrolled-banner" : ""}
         alt="bg-banner"
         src={bannerBg}
       ></img>
       <div className="overlay">
         <Container
-          className="overlay-container"
+          className={
+            !scrolled ? "overlay-container" : "invis-overlay-container"
+          }
           style={{
             position: "absolute",
             top: "50%",
@@ -37,7 +39,9 @@ const Banner = () => {
             borderRadius: "35px",
           }}
         >
-          <div className="overlay-text">Test</div>
+          <div className="overlay-text">
+            {scrolled ? "Get started today!" : "Welcome to RecipeBank!"}
+          </div>
         </Container>
       </div>
     </div>

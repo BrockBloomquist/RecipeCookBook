@@ -12,6 +12,11 @@
   align-items: center;
   font-size: 100px;
 }
+.invis-overlay-container {
+  background-color: #121212;
+  text-align: center;
+  inset: 0;
+}
 .overlay-container {
   background-color: #121212;
   text-align: center;
