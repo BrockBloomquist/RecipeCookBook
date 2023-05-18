@@ -1,4 +1,27 @@
 .banner img {
   width: 100%;
   height: 1000px;
+  position: relative;
+  align-items: center;
+}
+.banner .overlay {
+  position: absolute;
+  inset: 0;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  font-size: 100px;
+}
+.overlay-container {
+  background-color: #121212;
+  text-align: center;
+  inset: 0;
+}
+.overlay-text {
+  margin: 0;
+  inset: 0;
+  padding: 70px 0;
+}
+.scrolled-banner {
+  filter: blur(8px);
 }
