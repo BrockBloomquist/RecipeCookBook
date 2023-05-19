@@ -2,6 +2,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import bannerBg from "../Assets/img/banner-bg.jpg";
 import "./CSS Components/Banner.css";
 import React, { useState, useRef, useEffect } from "react";
+import "animate.css";
+
 const Banner = () => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -28,9 +30,7 @@ const Banner = () => {
       ></img>
       <div className="overlay">
         <Container
-          className={
-            !scrolled ? "overlay-container" : "invis-overlay-container"
-          }
+          className="overlay-container"
           style={{
             position: "absolute",
             top: "50%",
@@ -39,9 +39,7 @@ const Banner = () => {
             borderRadius: "35px",
           }}
         >
-          <div className="overlay-text">
-            {scrolled ? "Get started today!" : "Welcome to RecipeBank!"}
-          </div>
+          <div className="overlay-text">Welcome to RecipeBank!</div>
         </Container>
       </div>
     </div>
