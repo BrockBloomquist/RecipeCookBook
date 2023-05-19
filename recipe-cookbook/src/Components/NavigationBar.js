@@ -39,8 +39,6 @@ export const NavigationBar = () => {
             {" "}
             {/* logo class to style in css */}
             <span className="title">RecipeBank</span>{" "}
-            {/* cofo class to style in css */}
-            {/* concept class to style in css */}
           </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -57,7 +55,7 @@ export const NavigationBar = () => {
                 // inline styling for the Sign Up button
                 backgroundColor: "#fc4903", // orange
                 borderRadius: "20px", // rounded corners
-                padding: "10px 20px 10px",
+                padding: "10px 20px 10px", // makes the signup button centered
               }}
             >
               <button
@@ -72,6 +70,7 @@ export const NavigationBar = () => {
             <Nav.Link
               eventKey={2}
               href="/login"
+              className="nav-btn-link"
               style={{
                 // inline styling for the Sign Up button
                 color: "white",

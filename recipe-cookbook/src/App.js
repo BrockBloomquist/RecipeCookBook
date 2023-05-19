@@ -1,12 +1,10 @@
 import "./App.css";
-import { NavigationBar } from "./Components/NavigationBar";
-import Banner from "./Components/Banner";
+import Coverpage from "./Pages/Coverpage";
 
 function App() {
   return (
     <div className="App">
-      <NavigationBar />
-      <Banner />
+      <Coverpage />
     </div>
   );
 }
