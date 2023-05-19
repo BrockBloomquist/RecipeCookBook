@@ -23,12 +23,8 @@
   text-align: center;
   inset: 0;
 }
-.overlay-text {
-  margin: 0;
-  inset: 0;
-  animation: bounce;
-  animation-duration: 2s;
-  padding: 70px 0;
+.overlay-text h1 {
+  font-size: 70px;
 }
 .scrolled-banner {
   filter: blur(8px);
