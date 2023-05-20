@@ -6,3 +6,8 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
+.wholecard h2 {
+  color: black;
+  font-weight: bold;
+  font-size: 50px;
+}
