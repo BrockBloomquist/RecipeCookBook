@@ -1,8 +1,11 @@
 import React from "react";
 import { Form, Button, Container, Card } from "react-bootstrap";
-import { useState } from "react";
+import { Link, useHistory, useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 import "./CSS Pages/Login.css";
 export default function Login() {
+  const passwordRef = useRef();
+  const navigate = useNavigate();
   const [checkbox, setCheckbox] = useState(false);
   function handleSubmit(e) {
     e.preventDefault();
@@ -10,27 +13,37 @@ export default function Login() {
     if (checkbox.checked) {
     }
   }
+  function handleGoBack() {
+    navigate(-1);
+  }
   return (
     <Card className="wholecard">
+      <Button
+        className="back-btn"
+        onClick={handleGoBack}
+        style={{ width: "80px" }}
+      >
+        Back
+      </Button>
       <Card.Body className="card-body-login">
         <h2 className="text-center mb-4 black">Log In</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label className="form-text">Email Address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="form-text">Password</Form.Label>
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check
               type="checkbox"
               label="Remember your username"
+              className="form-text"
               onChange={(e) => setCheckbox(e.target.checked)}
             />
           </Form.Group>

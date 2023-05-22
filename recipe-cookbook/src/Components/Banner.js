@@ -43,7 +43,7 @@ const Banner = () => {
           >
             <div className="overlay-text">
               <h1
-                className="animate__animated animate__bounce"
+                className={true ? "animate__animated animate__bounce" : ""}
                 style={{
                   margin: "0",
                   inset: "0",
