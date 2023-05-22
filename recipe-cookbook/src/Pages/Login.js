@@ -47,7 +47,14 @@ export default function Login() {
               onChange={(e) => setCheckbox(e.target.checked)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button
+            variant="primary"
+            type="submit"
+            style={{
+              left: "39%",
+              position: "relative",
+            }}
+          >
             Submit
           </Button>
         </Form>
