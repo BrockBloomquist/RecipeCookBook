@@ -14,7 +14,7 @@ export default function Login() {
     }
   }
   function handleGoBack() {
-    navigate(-1);
+    navigate("/");
   }
   return (
     <Card className="wholecard">
@@ -59,6 +59,26 @@ export default function Login() {
           </Button>
         </Form>
       </Card.Body>
+      <div>
+        <h6
+          style={{
+            position: "relative",
+            left: "28%",
+          }}
+        >
+          Forgot your password?
+        </h6>
+        <a
+          className="primary"
+          style={{
+            position: "relative",
+            left: "34%",
+            color: "primary",
+          }}
+        >
+          Reset Password
+        </a>
+      </div>
     </Card>
   );
 }

@@ -9,7 +9,7 @@ export default function Signup() {
     e.preventDefault();
   }
   function handleGoBack() {
-    navigate(-1);
+    navigate("/");
   }
   return (
     <Card className="wholecard">
