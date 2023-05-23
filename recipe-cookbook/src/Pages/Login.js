@@ -21,7 +21,7 @@ export default function Login() {
       <Button
         className="back-btn"
         onClick={handleGoBack}
-        style={{ width: "80px" }}
+        style={{ width: "80px", paddingRight: "5px", paddingLeft: "5px" }}
       >
         Back
       </Button>

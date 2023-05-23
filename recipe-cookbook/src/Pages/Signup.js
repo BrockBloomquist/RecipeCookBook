@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { Link, useHistory, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "./CSS Pages/Login.css";
+import "./CSS Pages/Signup.css";
 export default function Signup() {
   const navigate = useNavigate();
   function handleSubmit(e) {
@@ -51,6 +51,25 @@ export default function Signup() {
           </Button>
         </Form>
       </Card.Body>
+      <div>
+        <h6
+          style={{
+            left: "25%",
+            position: "relative",
+          }}
+        >
+          Already have an account?
+        </h6>
+        <a
+          href="/login"
+          style={{
+            left: "45%",
+            position: "relative",
+          }}
+        >
+          Login
+        </a>
+      </div>
     </Card>
   );
 }

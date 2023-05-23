@@ -49,6 +49,7 @@ const Banner = () => {
                   inset: "0",
                   padding: "100px 0",
                   fontWeight: "bold",
+                  color: "white",
                 }}
               >
                 Welcome to RecipeBank!
