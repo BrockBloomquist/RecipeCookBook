@@ -18,7 +18,10 @@ export default function Login() {
     try {
       setError("");
       setLoading(true);
-      await auth.signInWithEmailAndPassword(emailRef, passwordRef);
+      await auth.signInWithEmailAndPassword(
+        emailRef.current.value,
+        passwordRef.current.value
+      );
       navigate("/");
     } catch {
       setError("Failed to log in");
@@ -40,7 +43,7 @@ export default function Login() {
       <Card.Body className="card-body-login">
         <h2 className="text-center mb-4 black">Log In</h2>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="email">
             <Form.Label className="form-text">Email Address</Form.Label>
             <Form.Control
               type="email"
@@ -52,7 +55,7 @@ export default function Login() {
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="password">
             <Form.Label className="form-text">Password</Form.Label>
             <Form.Control
               type="password"
@@ -61,7 +64,7 @@ export default function Login() {
               required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Group className="mb-3" controlId="checkbox">
             <Form.Check
               type="checkbox"
               label="Remember your username"
