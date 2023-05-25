@@ -1,12 +1,12 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+const app = firebase.initializeApp({
   apiKey: "AIzaSyChk7I7gTrUXtdxBQPab-CtuIzN0kiEzBI",
   authDomain: "recipecookbook-6999f.firebaseapp.com",
   projectId: "recipecookbook-6999f",
@@ -14,8 +14,8 @@ const firebaseConfig = {
   messagingSenderId: "139078562566",
   appId: "1:139078562566:web:c385c1c908ca4fc5fe6487",
   measurementId: "G-03C6B4YZC3",
-};
+});
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const auth = app.auth();
+export default app;

@@ -1,17 +1,30 @@
 import React from "react";
-import { Form, Button, Container, Card } from "react-bootstrap";
-import { Link, useHistory, useNavigate } from "react-router-dom";
+import { Form, Button, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import { useState, useRef } from "react";
+import { auth } from "../firebase";
 import "./CSS Pages/Login.css";
 export default function Login() {
+  const emailRef = useRef();
   const passwordRef = useRef();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [checkbox, setCheckbox] = useState(false);
-  function handleSubmit(e) {
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(checkbox);
-    if (checkbox.checked) {
+
+    try {
+      setError("");
+      setLoading(true);
+      await auth.signInWithEmailAndPasswordAsync(emailRef, passwordRef);
+      navigate("/");
+    } catch {
+      setError("Failed to log in");
     }
+    setLoading(false);
   }
   function handleGoBack() {
     navigate("/");
@@ -30,14 +43,24 @@ export default function Login() {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label className="form-text">Email Address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              ref={emailRef}
+              required
+            />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label className="form-text">Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              ref={passwordRef}
+              required
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check
@@ -54,8 +77,9 @@ export default function Login() {
               left: "39%",
               position: "relative",
             }}
+            disabled={loading}
           >
-            Submit
+            Login
           </Button>
         </Form>
       </Card.Body>

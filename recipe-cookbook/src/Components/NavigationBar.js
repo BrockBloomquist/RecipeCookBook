@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.min.css";
 import "./CSS Components/NavigationBar.css";
 
 export const NavigationBar = () => {
