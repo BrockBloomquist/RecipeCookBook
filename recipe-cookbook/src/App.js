@@ -3,6 +3,7 @@ import Coverpage from "./Pages/Coverpage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route exact path="/" Component={Coverpage} />
           <Route path="/login" Component={Login} />
           <Route path="/signup" Component={Signup} />
+          <Route path="/profile" Component={Profile} />
         </Routes>
       </BrowserRouter>
     </div>

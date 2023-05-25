@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
 import { useState, useRef } from "react";
 import { auth } from "../firebase";
 import "./CSS Pages/Login.css";
@@ -19,7 +18,7 @@ export default function Login() {
     try {
       setError("");
       setLoading(true);
-      await auth.signInWithEmailAndPasswordAsync(emailRef, passwordRef);
+      await auth.signInWithEmailAndPassword(emailRef, passwordRef);
       navigate("/");
     } catch {
       setError("Failed to log in");
