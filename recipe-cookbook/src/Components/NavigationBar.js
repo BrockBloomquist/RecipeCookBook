@@ -134,12 +134,11 @@ function LoggedInNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {/* Navbar Toggle for reponsive navigation */}
         <Navbar.Collapse id="basic-navbar-nav">
-          {" "}
           {/* Navbar Collapse for reponsive navigation for mobile phones*/}
           <Nav className="ms-auto">
             <Nav.Link
               eventKey={2}
-              className="SIGNUPBAR"
+              className="nav-btn-link"
               href="/profile"
               style={{
                 // inline styling for the Sign Up button
@@ -157,6 +156,26 @@ function LoggedInNavBar() {
                 Profile
               </button>
             </Nav.Link>
+            <Nav.Link
+              eventKey={2}
+              className="nav-btn-link"
+              href="/bank"
+              style={{
+                // inline styling for the Sign Up button
+                backgroundColor: "#fc4903", // orange
+                borderRadius: "20px", // rounded corners
+                padding: "10px 20px 10px", // makes the signup button centered
+              }}
+            >
+              <button
+                className="nav-btn"
+                style={{
+                  color: "white",
+                }}
+              >
+                Bank!
+              </button>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -164,19 +183,11 @@ function LoggedInNavBar() {
   );
 }
 
-export const NavigationBar = () => {
+export function NavigationBar() {
   const user = auth.currentUser;
   if (user) {
-    return (
-      <>
-        <LoggedInNavBar />
-      </>
-    );
+    return <LoggedInNavBar />;
   } else {
-    return (
-      <>
-        <SignedoutNavBar />
-      </>
-    );
+    return <SignedoutNavBar />;
   }
-};
+}

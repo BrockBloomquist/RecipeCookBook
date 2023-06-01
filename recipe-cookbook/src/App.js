@@ -5,7 +5,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Profile from "./Pages/Profile";
 import PrivateRoute from "./Components/PrivateRoute";
-
+import Bank from "./Pages/Bank";
 function App() {
   return (
     <div className="App">
@@ -19,6 +19,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/bank"
+            element={
+              <PrivateRoute>
+                <Bank />
               </PrivateRoute>
             }
           />
