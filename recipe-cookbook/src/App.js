@@ -14,22 +14,8 @@ function App() {
           <Route exact path="/" Component={Coverpage} />
           <Route path="/login" Component={Login} />
           <Route path="/signup" Component={Signup} />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/bank"
-            element={
-              <PrivateRoute>
-                <Bank />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/bank" element={<Bank />} />
         </Routes>
       </BrowserRouter>
     </div>

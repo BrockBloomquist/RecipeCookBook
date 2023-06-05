@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CSS Components/NavigationBar.css";
 import { auth } from "../firebase";
+import { getAuth } from "firebase/auth";
 
 function SignedoutNavBar() {
   const [scrolled, setScrolled] = useState(false);
@@ -134,11 +135,12 @@ function LoggedInNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {/* Navbar Toggle for reponsive navigation */}
         <Navbar.Collapse id="basic-navbar-nav">
+          {" "}
           {/* Navbar Collapse for reponsive navigation for mobile phones*/}
           <Nav className="ms-auto">
             <Nav.Link
               eventKey={2}
-              className="nav-btn-link"
+              className="SIGNUPBAR"
               href="/profile"
               style={{
                 // inline styling for the Sign Up button
@@ -158,13 +160,15 @@ function LoggedInNavBar() {
             </Nav.Link>
             <Nav.Link
               eventKey={2}
-              className="nav-btn-link"
               href="/bank"
+              className="nav-btn-link"
               style={{
                 // inline styling for the Sign Up button
-                backgroundColor: "#fc4903", // orange
+                color: "white",
                 borderRadius: "20px", // rounded corners
-                padding: "10px 20px 10px", // makes the signup button centered
+                padding: "10px 20px 10px",
+                marginLeft: "10px",
+                backgroundColor: "#fc4903", // orange
               }}
             >
               <button
@@ -184,10 +188,19 @@ function LoggedInNavBar() {
 }
 
 export function NavigationBar() {
+  const auth = getAuth();
   const user = auth.currentUser;
   if (user) {
-    return <LoggedInNavBar />;
+    return (
+      <>
+        <LoggedInNavBar />
+      </>
+    );
   } else {
-    return <SignedoutNavBar />;
+    return (
+      <>
+        <SignedoutNavBar />
+      </>
+    );
   }
 }

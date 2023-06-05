@@ -1,19 +1,17 @@
 import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { useState, useRef } from "react";
+import { getAuth } from "firebase/auth";
+import { useState } from "react";
 import { auth } from "../firebase";
 import "./CSS Pages/Login.css";
 export default function Profile() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const test = getAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       setError("");
       setLoading(true);
@@ -25,7 +23,7 @@ export default function Profile() {
     setLoading(false);
   }
   function handleGoBack() {
-    navigate("/");
+    navigate(-1);
   }
   return (
     <Card className="wholecard">
