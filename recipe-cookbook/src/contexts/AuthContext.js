@@ -1,23 +1,34 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
-import { auth } from "../firebase";
+//import { auth } from "../firebase";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  sendSignInLinkToEmail,
+  sendEmailVerification,
+  getIdToken,
+} from "firebase/auth";
 
 const AuthContext = createContext();
-
 export function useAuth() {
   return useContext(AuthContext);
 }
 
-export default function AuthProvider({ children }) {
+// returns the values we want to provide for authentication
+export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true); //verification to see if there is already user
+  const auth = getAuth();
 
   // cretes a user instance when signup occurs
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   }
+
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(email, password);
   }
 
   function logout() {
@@ -46,7 +57,9 @@ export default function AuthProvider({ children }) {
       setCurrentUser(user);
       setLoading(false);
     });
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const value = {

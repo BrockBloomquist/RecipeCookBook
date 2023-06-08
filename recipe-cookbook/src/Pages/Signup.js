@@ -11,35 +11,25 @@ export default function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const emailRef = useRef();
-  const emailConfirmRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const { signup } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    if (
-      passwordRef.current.value !== passwordConfirmRef.current.value &&
-      emailRef.current.value !== emailConfirmRef.current.value
-    ) {
+    if (password !== confirmPassword) {
       return setError("Password does not match");
     }
 
     try {
       setError("");
       setLoading(true);
-      await auth
-        .createUserWithEmailAndPassword(
-          emailRef.current.value,
-          passwordRef.current.value
-        )
-        .then((userCredential) => {
-          const user = userCredential.user;
-        });
+      await signup(email, password);
       navigate("/");
-    } catch {
+    } catch (err) {
       setError("Failed to create an account");
+      console.log(err);
     }
     setLoading(false);
   }
@@ -64,15 +54,7 @@ export default function Signup() {
             <Form.Control
               type="email"
               placeholder="e.g johndoe@gmail.com"
-              ref={emailRef}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" id="confirmEmail">
-            <Form.Label className="form-text">Confirm Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="e.g johndoe@gmail.com"
-              ref={emailConfirmRef}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" id="password">
@@ -80,7 +62,7 @@ export default function Signup() {
             <Form.Control
               type="password"
               placeholder="Password"
-              ref={passwordRef}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" id="confirmPassword">
@@ -88,7 +70,7 @@ export default function Signup() {
             <Form.Control
               type="password"
               placeholder="Password"
-              ref={passwordConfirmRef}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
           <Button
