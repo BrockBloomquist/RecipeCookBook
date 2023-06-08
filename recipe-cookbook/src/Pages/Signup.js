@@ -1,10 +1,8 @@
 import React from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { Link, useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { auth } from "../firebase";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "./CSS Pages/Signup.css";
 
 export default function Signup() {
@@ -29,7 +27,6 @@ export default function Signup() {
       navigate("/");
     } catch (err) {
       setError("Failed to create an account");
-      console.log(err);
     }
     setLoading(false);
   }

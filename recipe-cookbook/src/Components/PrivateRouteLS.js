@@ -6,9 +6,9 @@ import { getAuth } from "firebase/auth";
 export default function PrivateRoute({ children }, L) {
   const auth = getAuth();
   const user = auth.currentUser;
-  if (user) {
+  if (!user) {
     return children;
   } else {
-    return <Navigate to="/login" />;
+    return <Navigate to="/profile" />;
   }
 }

@@ -2,15 +2,16 @@ import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
-import { auth } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
 import "./CSS Pages/Login.css";
 export default function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [checkbox, setCheckbox] = useState(false);
+  const { login } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,10 +19,7 @@ export default function Login() {
     try {
       setError("");
       setLoading(true);
-      await auth.signInWithEmailAndPassword(
-        emailRef.current.value,
-        passwordRef.current.value
-      );
+      await login(email, password);
       navigate("/");
     } catch {
       setError("Failed to log in");
@@ -48,7 +46,7 @@ export default function Login() {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              ref={emailRef}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <Form.Text className="text-muted">
@@ -60,7 +58,7 @@ export default function Login() {
             <Form.Control
               type="password"
               placeholder="Password"
-              ref={passwordRef}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </Form.Group>
