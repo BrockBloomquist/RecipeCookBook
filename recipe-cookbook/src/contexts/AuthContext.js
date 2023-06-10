@@ -4,6 +4,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -13,10 +15,9 @@ export function useAuth() {
 
 // returns the values we want to provide for authentication
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true); //verification to see if there is already user
   const auth = getAuth();
-
+  const currentUser = auth.currentUser;
   // cretes a user instance when signup occurs
 
   function signup(email, password) {
@@ -28,11 +29,11 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    return auth.signOut();
+    return signOut(auth);
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(auth, email);
   }
 
   function updateEmail(email) {
@@ -40,7 +41,7 @@ export function AuthProvider({ children }) {
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password);
+    return updatePassword(currentUser, password);
   }
 
   function emailConfirmation() {
@@ -49,8 +50,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     //allows us to set the user
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    const unsubscribe = auth.onAuthStateChanged(() => {
       setLoading(false);
     });
     return () => {
