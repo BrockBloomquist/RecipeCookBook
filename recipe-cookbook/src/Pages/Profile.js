@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
@@ -23,11 +23,9 @@ export default function Profile() {
       setError("");
       setLoading(true);
       await changePassword(password);
-      setPasswordChanged(true);
       navigate("/profile");
     } catch (e) {
       setError("Failed to change password");
-      console.log(e);
     }
     setLoading(false);
   }
@@ -59,28 +57,26 @@ export default function Profile() {
         <h2 className="text-center mb-4 black">Sign Out</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleUpdatePassword}>
-          <Form.Group
-            className={passwordChanged ? "changedPassword" : ""}
-            id="password"
-          >
-            <Form.Label className="form-text">New Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="New Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group
-            className={passwordChanged ? "changedPassword" : ""}
-            id="confirmPassword"
-          >
-            <Form.Label className="form-text">Confirm New Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm New Password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
+          <div className={passwordChanged ? "changedPassword" : ""}>
+            <Form.Group id="password">
+              <Form.Label className="form-text">New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="New Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group id="confirmPassword">
+              <Form.Label className="form-text">
+                Confirm New Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm New Password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </Form.Group>
+          </div>
           {passwordChanged && (
             <Alert variant="success">Your password has been changed!</Alert>
           )}

@@ -1,7 +1,7 @@
 import React from "react";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./CSS Pages/Login.css";
 export default function Login() {
@@ -15,19 +15,25 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
+      if (checkbox) {
+        window.localStorage.setItem("username", email);
+      }
       setError("");
       setLoading(true);
       await login(email, password);
       navigate("/");
     } catch {
-      setError("Failed to log in");
+      setError("Failed to login");
     }
     setLoading(false);
   }
   function handleGoBack() {
     navigate("/");
+  }
+  function saveEmail(e) {
+    if (window.localStorage.getItem("username")) {
+    }
   }
   return (
     <Card className="wholecard">
@@ -40,6 +46,7 @@ export default function Login() {
       </Button>
       <Card.Body className="card-body-login">
         <h2 className="text-center mb-4 black">Log In</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Label className="form-text">Email Address</Form.Label>
