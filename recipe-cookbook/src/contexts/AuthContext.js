@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
 
@@ -17,7 +18,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true); //verification to see if there is already user
   const auth = getAuth();
-  const currentUser = auth.currentUser;
+  const user = auth.currentUser;
   // cretes a user instance when signup occurs
 
   function signup(email, password) {
@@ -37,15 +38,15 @@ export function AuthProvider({ children }) {
   }
 
   function updateEmail(email) {
-    return currentUser.updateEmail(email);
+    return user.updateEmail(auth, email);
   }
 
-  function updatePassword(password) {
-    return updatePassword(currentUser, password);
+  function changePassword(password) {
+    return updatePassword(user, password);
   }
 
   function emailConfirmation() {
-    return auth.currentUser.sendEmailVerification();
+    return auth.user.sendEmailVerification();
   }
 
   useEffect(() => {
@@ -59,13 +60,13 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = {
-    currentUser,
+    user,
     signup,
     login,
     logout,
     resetPassword,
     updateEmail,
-    updatePassword,
+    changePassword,
   };
 
   return (

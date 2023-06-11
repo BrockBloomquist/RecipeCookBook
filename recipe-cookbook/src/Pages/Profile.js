@@ -13,7 +13,7 @@ export default function Profile() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { logout, updatePassword } = useAuth();
+  const { logout, changePassword } = useAuth();
   async function handleUpdatePassword(e) {
     if (password != confirmPassword) {
       return setError("Invalid password");
@@ -22,7 +22,7 @@ export default function Profile() {
     try {
       setError("");
       setLoading(true);
-      await updatePassword(password);
+      await changePassword(password);
       setPasswordChanged(true);
       navigate("/profile");
     } catch (e) {
@@ -59,7 +59,10 @@ export default function Profile() {
         <h2 className="text-center mb-4 black">Sign Out</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleUpdatePassword}>
-          <Form.Group className="mb-3" id="password">
+          <Form.Group
+            className={passwordChanged ? "changedPassword" : ""}
+            id="password"
+          >
             <Form.Label className="form-text">New Password</Form.Label>
             <Form.Control
               type="password"
@@ -68,7 +71,7 @@ export default function Profile() {
             />
           </Form.Group>
           <Form.Group
-            className={passwordChanged ? "" : ""}
+            className={passwordChanged ? "changedPassword" : ""}
             id="confirmPassword"
           >
             <Form.Label className="form-text">Confirm New Password</Form.Label>
