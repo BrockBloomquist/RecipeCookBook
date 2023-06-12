@@ -33,6 +33,9 @@ export default function Login() {
   }
   function saveEmail(e) {
     if (window.localStorage.getItem("username")) {
+      e.target.value = window.localStorage.getItem("username");
+    } else {
+      setEmail(e.target.value);
     }
   }
   return (

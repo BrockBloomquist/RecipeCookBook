@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import "./CSS Pages/Login.css";
+import "./CSS Pages/Profile.css";
 export default function Profile() {
   const test = getAuth();
   const [error, setError] = useState("");
@@ -22,6 +22,7 @@ export default function Profile() {
     try {
       setError("");
       setLoading(true);
+      setPasswordChanged(true);
       await changePassword(password);
       navigate("/profile");
     } catch (e) {
@@ -54,8 +55,9 @@ export default function Profile() {
         Back
       </Button>
       <Card.Body className="card-body-login">
-        <h2 className="text-center mb-4 black">Sign Out</h2>
+        <h2 className="text-center mb-5 black">Sign Out</h2>
         {error && <Alert variant="danger">{error}</Alert>}
+        <h3>Change your password</h3>
         <Form onSubmit={handleUpdatePassword}>
           <div className={passwordChanged ? "changedPassword" : ""}>
             <Form.Group id="password">
