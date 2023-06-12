@@ -57,9 +57,9 @@ export default function Profile() {
       <Card.Body className="card-body-login">
         <h2 className="text-center mb-5 black">Sign Out</h2>
         {error && <Alert variant="danger">{error}</Alert>}
-        <h3>Change your password</h3>
         <Form onSubmit={handleUpdatePassword}>
           <div className={passwordChanged ? "changedPassword" : ""}>
+            <h3>Change your password</h3>
             <Form.Group id="password">
               <Form.Label className="form-text">New Password</Form.Label>
               <Form.Control
@@ -78,23 +78,24 @@ export default function Profile() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </Form.Group>
+
+            <Button
+              variant="primary"
+              type="submit"
+              style={{
+                left: "30%",
+                marginTop: "10%",
+                marginBottom: "5%",
+                position: "relative",
+              }}
+              disabled={loading}
+            >
+              Update Password
+            </Button>
           </div>
           {passwordChanged && (
             <Alert variant="success">Your password has been changed!</Alert>
           )}
-          <Button
-            variant="primary"
-            type="submit"
-            style={{
-              left: "30%",
-              marginTop: "10%",
-              marginBottom: "5%",
-              position: "relative",
-            }}
-            disabled={loading}
-          >
-            Update Password
-          </Button>
         </Form>
         <Form onSubmit={handleSignOut}>
           <Button

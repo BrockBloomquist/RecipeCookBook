@@ -34,7 +34,7 @@ function App() {
             <Route
               path="/profile"
               element={
-                <PrivateRoute L={true}>
+                <PrivateRoute>
                   <Profile />
                 </PrivateRoute>
               }
@@ -46,7 +46,6 @@ function App() {
                   <Bank />
                 </PrivateRoute>
               }
-              L={true}
             />
           </Routes>
         </AuthProvider>
