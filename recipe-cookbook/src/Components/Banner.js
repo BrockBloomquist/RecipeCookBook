@@ -23,11 +23,7 @@ const Banner = () => {
 
   return (
     <div className="banner">
-      <img
-        className={!scrolled ? "scrolled-banner" : ""}
-        alt="bg-banner"
-        src={bannerBg}
-      ></img>
+      <img alt="bg-banner" src={bannerBg} />
       <div className="overlay">
         <Container
           className="overlay-container"
