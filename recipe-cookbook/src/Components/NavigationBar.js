@@ -183,7 +183,7 @@ function LoggedInNavBar() {
   );
 }
 
-export function NavigationBar() {
+export default function NavigationBar() {
   const user = auth.currentUser;
   if (user) {
     return <LoggedInNavBar />;

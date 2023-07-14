@@ -6,12 +6,13 @@ import Signup from "./Pages/Signup";
 import Profile from "./Pages/Profile";
 import PrivateRoute from "./Components/PrivateRoute";
 import Bank from "./Pages/Bank";
+import NavigationBar from "./Components/NavigationBar";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" Component={Coverpage} />
+          <Route exact path="/" element={<Coverpage />} />
           <Route path="/login" Component={Login} />
           <Route path="/signup" Component={Signup} />
           <Route
@@ -26,6 +27,7 @@ function App() {
             path="/bank"
             element={
               <PrivateRoute>
+                <NavigationBar />
                 <Bank />
               </PrivateRoute>
             }
