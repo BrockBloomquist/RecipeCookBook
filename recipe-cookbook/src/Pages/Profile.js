@@ -1,31 +1,49 @@
-import React from "react";
-import { Form, Button, Card } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useState, useRef } from "react";
-import { auth } from "../firebase";
-import "./CSS Pages/Login.css";
+import "./CSS Pages/Profile.css";
 export default function Profile() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const test = getAuth();
   const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  async function handleSubmit(e) {
+  const { logout, changePassword } = useAuth();
+  async function handleUpdatePassword(e) {
+    if (password != confirmPassword) {
+      return setError("Invalid password");
+    }
     e.preventDefault();
-
     try {
       setError("");
       setLoading(true);
-      await auth.signOut();
+      setPasswordChanged(true);
+      await changePassword(password);
+      navigate("/profile");
+    } catch (e) {
+      setError("Failed to change password");
+    }
+    setLoading(false);
+  }
+  async function handleSignOut(e) {
+    e.preventDefault();
+    try {
+      setError("");
+      setLoading(true);
+      await logout();
       navigate("/");
     } catch {
-      setError("Failed to log in");
+      setError("Failed to log out");
     }
     setLoading(false);
   }
   function handleGoBack() {
-    navigate("/");
+    navigate(-1);
   }
   return (
     <Card className="wholecard">
@@ -37,8 +55,49 @@ export default function Profile() {
         Back
       </Button>
       <Card.Body className="card-body-login">
-        <h2 className="text-center mb-4 black">Sign Out</h2>
-        <Form onSubmit={handleSubmit}>
+        <h2 className="text-center mb-5 black">Sign Out</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleUpdatePassword}>
+          <div className={passwordChanged ? "changedPassword" : ""}>
+            <h3>Change your password</h3>
+            <Form.Group id="password">
+              <Form.Label className="form-text">New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="New Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group id="confirmPassword">
+              <Form.Label className="form-text">
+                Confirm New Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm New Password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </Form.Group>
+
+            <Button
+              variant="primary"
+              type="submit"
+              style={{
+                left: "30%",
+                marginTop: "10%",
+                marginBottom: "5%",
+                position: "relative",
+              }}
+              disabled={loading}
+            >
+              Update Password
+            </Button>
+          </div>
+          {passwordChanged && (
+            <Alert variant="success">Your password has been changed!</Alert>
+          )}
+        </Form>
+        <Form onSubmit={handleSignOut}>
           <Button
             variant="primary"
             type="submit"

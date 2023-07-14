@@ -1,62 +1,72 @@
-import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
+import React, { useContext, useState, useEffect, createContext } from "react";
+//import { auth } from "../firebase";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updatePassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 
-const AuthContext = React.createContext();
-
+const AuthContext = createContext();
 export function useAuth() {
   return useContext(AuthContext);
 }
 
-export default function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
+// returns the values we want to provide for authentication
+export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true); //verification to see if there is already user
-
+  const auth = getAuth();
+  const user = auth.currentUser;
   // cretes a user instance when signup occurs
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   }
+
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   function logout() {
-    return auth.signOut();
+    return signOut(auth);
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(auth, email);
   }
 
   function updateEmail(email) {
-    return currentUser.updateEmail(email);
+    return user.updateEmail(auth, email);
   }
 
-  function updatePassword(password) {
-    return currentUser.updatePassword(password);
+  function changePassword(password) {
+    return updatePassword(user, password);
   }
 
   function emailConfirmation() {
-    return auth.currentUser.sendEmailVerification();
+    return auth.user.sendEmailVerification();
   }
 
   useEffect(() => {
     //allows us to set the user
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    const unsubscribe = auth.onAuthStateChanged(() => {
       setLoading(false);
     });
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const value = {
-    currentUser,
+    user,
     signup,
     login,
     logout,
     resetPassword,
     updateEmail,
-    updatePassword,
+    changePassword,
   };
 
   return (

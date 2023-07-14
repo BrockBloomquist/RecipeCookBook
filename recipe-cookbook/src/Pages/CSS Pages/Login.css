@@ -14,3 +14,10 @@
 .form-text {
   color: black;
 }
+.background img {
+  width: 100%;
+  height: 935px;
+  position: absolute;
+  align-items: center;
+  filter: blur(9px);
+}
