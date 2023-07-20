@@ -45,9 +45,9 @@ export function AuthProvider({ children }) {
     return updatePassword(user, password);
   }
 
-  function emailConfirmation() {
-    return auth.user.sendEmailVerification();
-  }
+  // function emailConfirmation() {
+  //   return auth.user.sendEmailVerification();
+  // }
 
   useEffect(() => {
     //allows us to set the user
@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  });
 
   const value = {
     user,

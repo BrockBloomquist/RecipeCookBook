@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import background from "../Assets/img/LS-bg.jpg";
 import "./CSS Pages/Signup.css";
@@ -36,7 +36,7 @@ export default function Signup() {
   }
   return (
     <div className="background">
-      <img src={background} className="LS-bg" />
+      <img src={background} className="LS-bg" alt="colorful-background" />
       <Card
         className="wholecard"
         style={{

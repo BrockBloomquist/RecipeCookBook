@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./CSS Pages/Profile.css";
 export default function Profile() {
-  const test = getAuth();
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
@@ -15,7 +12,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const { logout, changePassword } = useAuth();
   async function handleUpdatePassword(e) {
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       return setError("Invalid password");
     }
     e.preventDefault();
